@@ -405,7 +405,7 @@
       </div>
 
       <div class="faq-list reveal">
-        <div class="faq-item active">
+        <div class="faq-item">
           <button>Apa SirenDesk cocok untuk bisnis yang baru mulai?</button>
           <div class="faq-content">
             <p>Cocok. Justru aset digital yang rapi sejak awal bisa membantu bisnis terlihat lebih serius dan lebih mudah menjelaskan penawaran ke calon customer.</p>
