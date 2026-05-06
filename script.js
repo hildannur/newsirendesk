@@ -6,6 +6,28 @@
 // form kirim pesan ke WhatsApp, kode rahasia admin,
 // dan counter Clients di Landing Page Performance.
 
+// =============================
+// RESET SCROLL TO TOP ON REFRESH
+// =============================
+// Saat halaman di-refresh, posisi halaman otomatis kembali ke paling atas.
+
+if ("scrollRestoration" in history) {
+    history.scrollRestoration = "manual";
+}
+
+window.addEventListener("beforeunload", () => {
+    window.scrollTo(0, 0);
+});
+
+window.addEventListener("load", () => {
+    setTimeout(() => {
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: "auto"
+        });
+    }, 0);
+});
 
 // Mengambil elemen-elemen utama dari HTML
 const navbar = document.getElementById("navbar");
