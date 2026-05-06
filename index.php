@@ -504,6 +504,6 @@
   </script>
 
   <!-- Custom JavaScript SirenDesk -->
-  <script src="script.js"></script>
+  <script src="script.js?v=5"></script>
 </body>
 </html>
