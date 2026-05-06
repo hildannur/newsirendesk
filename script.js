@@ -6,28 +6,29 @@
 // form kirim pesan ke WhatsApp, kode rahasia admin,
 // dan counter Clients di Landing Page Performance.
 
+
 // =============================
 // RESET SCROLL TO TOP ON REFRESH
 // =============================
 // Saat halaman di-refresh, posisi halaman otomatis kembali ke paling atas.
+// Tidak berlaku saat user klik tombol yang redirect ke WhatsApp.
 
 if ("scrollRestoration" in history) {
     history.scrollRestoration = "manual";
 }
 
-window.addEventListener("beforeunload", () => {
-    window.scrollTo(0, 0);
-});
-
 window.addEventListener("load", () => {
-    setTimeout(() => {
+    const navigationType = performance.getEntriesByType("navigation")[0]?.type;
+
+    if (navigationType === "reload") {
         window.scrollTo({
             top: 0,
             left: 0,
             behavior: "auto"
         });
-    }, 0);
+    }
 });
+
 
 // Mengambil elemen-elemen utama dari HTML
 const navbar = document.getElementById("navbar");
@@ -211,6 +212,9 @@ loadPerformanceClientCounter();
 // 2. Jika selain itu,
 //    user diarahkan ke WhatsApp admin,
 //    dan data TIDAK disimpan ke admin.
+//
+// 3. Kolom nama lengkap hanya boleh berisi huruf dan spasi.
+//    Tidak boleh angka dan karakter spesial.
 
 if (contactForm) {
     contactForm.addEventListener("submit", async (event) => {
@@ -227,6 +231,17 @@ if (contactForm) {
         // Validasi sederhana sebelum diproses
         if (!name || !service) {
             alert("Nama dan kebutuhan wajib diisi.");
+            return;
+        }
+
+        // Validasi nama lengkap
+        // Hanya boleh huruf dan spasi.
+        // Tidak boleh angka, simbol, titik, koma, underscore, strip, dan karakter spesial lainnya.
+        const namePattern = /^[A-Za-zÀ-ÿ\s]+$/;
+
+        if (!namePattern.test(name)) {
+            alert("Nama lengkap hanya boleh berisi huruf dan spasi. Tidak boleh angka atau karakter spesial.");
+            nameInput.focus();
             return;
         }
 
@@ -288,10 +303,10 @@ if (contactForm) {
         // User diarahkan ke WhatsApp admin.
         // Data tidak masuk ke admin.php.
 
-        const nomorAdmin = "628xxxxxxxxxx"; 
+        const nomorAdmin = "6282336722751";
         // Ganti dengan nomor WhatsApp admin kamu.
         // Contoh:
-        // const nomorAdmin = "6281234567890";
+        // const nomorAdmin = "6282336722751";
 
         const teksWhatsapp =
             `Halo Admin SirenDesk,%0A%0A` +
